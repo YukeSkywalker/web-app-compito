@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1773587783843,
+    "userId": 2,
+    "user": "Luca",
+    "email": "luca@test.it",
+    "items": [
+      {
+        "name": "Mouse Gaming",
+        "quantity": 2,
+        "price": 40
+      }
+    ],
+    "total": 80,
+    "date": "2026-03-15T15:16:23.843Z"
+  }
+]

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Carrello</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <div class="page">
+        <header class="main-header">
+
+            <div class="header-inner">
+
+                <div class="header-left">
+                    Benvenuto: <span id="userName"></span>
+                </div>
+
+                <div class="header-credits">
+                    <div class="header-credits">
+                        Crediti: <span id="creditsHeader"></span>
+                    </div>
+                </div>
+
+                <div class="header-right">
+
+                    <button onclick="goToShop()" class="header-btn">
+                        ← Shop
+                    </button>
+
+                    <button onclick="logout()" class="header-btn logout">
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <div class="cart-box">
+
+            <div id="cartItems"></div>
+
+            <button class="checkout-btn" onclick="checkout()">
+                Effettua ordine
+            </button>
+
+            <p id="orderMessage"></p>
+
+        </div>
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+
+</body>
+
+</html>
