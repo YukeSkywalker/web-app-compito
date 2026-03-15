@@ -82,47 +82,64 @@ function decrease(productId) {
     loadCart()
 }
 
-async function checkout() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || []
+async function checkout(){
 
-    if (cart.length === 0) {
-        alert("Carrello vuoto")
-        return
-    }
+const cart = JSON.parse(localStorage.getItem("cart")) || []
 
-    try {
-        const res = await fetch(API_BASE_URL + "/api/order", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                userId: user.id,
-                cart
-            })
-        })
+if(cart.length === 0){
+alert("Carrello vuoto")
+return
+}
 
-        const data = await res.json()
+try{
 
-        if (!res.ok) {
-            document.getElementById("orderMessage").innerText = data.error
-            return
-        }
+const res = await fetch(API_BASE_URL + "/api/order",{
 
-        localStorage.removeItem("cart")
+method:"POST",
 
-        user.credits = data.credits
-        localStorage.setItem("user", JSON.stringify(user))
+headers:{
+"Content-Type":"application/json"
+},
 
-        document.getElementById("orderMessage").innerText =
-            "Grazie per il tuo ordine! Acquisto completato con successo."
+body:JSON.stringify({
+userId:user.id,
+cart
+})
 
-        setTimeout(() => {
-            window.location.href = "index.html"
-        }, 1500)
-    } catch (error) {
-        document.getElementById("orderMessage").innerText = "Errore server"
-    }
+})
+
+const data = await res.json()
+
+if(!res.ok){
+
+document.getElementById("orderMessage").innerText = data.error
+return
+
+}
+
+/* aggiorna crediti utente */
+
+user.credits = data.credits
+
+localStorage.setItem("user", JSON.stringify(user))
+
+localStorage.removeItem("cart")
+
+document.getElementById("orderMessage").innerText =
+"Grazie per il tuo ordine!"
+
+setTimeout(()=>{
+
+window.location.href="index.html"
+
+},1500)
+
+}catch(error){
+
+document.getElementById("orderMessage").innerText="Errore server"
+
+}
+
 }
 
 loadCart()
