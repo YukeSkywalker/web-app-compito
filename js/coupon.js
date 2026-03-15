@@ -1,32 +1,46 @@
-async function redeemCoupon() {
-    const code = prompt("Inserisci codice coupon")
+async function redeemCoupon(){
 
-    if (!code) return
+const code = prompt("Inserisci codice coupon")
 
-    const currentUser = JSON.parse(localStorage.getItem("user"))
+if(!code) return
 
-    try {
-        const res = await fetch(API_BASE_URL + "/api/users/" + currentUser.id + "/coupon", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ code })
-        })
+const user = JSON.parse(localStorage.getItem("user"))
 
-        const data = await res.json()
+try{
 
-        if (!res.ok) {
-            alert(data.error)
-            return
-        }
+const res = await fetch(API_BASE_URL + "/api/users/"+user.id+"/coupon",{
 
-        localStorage.setItem("user", JSON.stringify(data.user))
+method:"POST",
 
-        alert("Hai ricevuto 200 crediti!")
+headers:{
+"Content-Type":"application/json"
+},
 
-        location.reload()
-    } catch (error) {
-        alert("Errore server")
-    }
+body:JSON.stringify({code})
+
+})
+
+const data = await res.json()
+
+if(!res.ok){
+
+alert(data.error)
+return
+
+}
+
+/* aggiorna utente */
+
+localStorage.setItem("user", JSON.stringify(data.user))
+
+alert("Hai ricevuto 200 crediti!")
+
+location.reload()
+
+}catch(error){
+
+alert("Errore server")
+
+}
+
 }
