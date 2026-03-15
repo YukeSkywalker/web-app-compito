@@ -198,43 +198,32 @@ function openOrders() {
 }
 
 async function loadOrders() {
-
     const res = await fetch(API_BASE_URL + "/api/orders")
-
     const orders = await res.json()
 
     const container = document.getElementById("orders")
-
     container.innerHTML = ""
 
-    orders.slice(-4).reverse().forEach(o => {
-
+    orders.slice(0, 4).forEach(o => {
         let productsList = ""
 
-        o.items.forEach(item => {
-
-            productsList += `${item.name} x${item.quantity} `
-
-        })
+        if (Array.isArray(o.items)) {
+            o.items.forEach(item => {
+                productsList += `${item.name} x${item.quantity}<br>`
+            })
+        }
 
         const row = document.createElement("div")
-
         row.className = "admin-row"
 
         row.innerHTML = `
-
-            <span>${o.user}</span>
-
+            <span>${o.username || o.user || o.email}</span>
             <span>${productsList}</span>
-
             <span>${o.total} crediti</span>
-
-            `
+        `
 
         container.appendChild(row)
-
     })
-
 }
 
 loadProducts()
