@@ -1,7 +1,7 @@
 const user = checkAuth("user")
 
 document.getElementById("userName").innerText = user.name
-document.getElementById("creditsHeader").innerText = user.credits
+document.getElementById("creditsHeader").innerText = user.credits || 0
 
 function goToCart() {
     window.location.href = "cart.html"
