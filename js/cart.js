@@ -111,19 +111,19 @@ cart
 const data = await res.json()
 
 if(!res.ok){
-
 document.getElementById("orderMessage").innerText = data.error
 return
-
 }
 
-/* aggiorna crediti utente */
+/* aggiorna crediti */
 
 user.credits = data.credits
 
 localStorage.setItem("user", JSON.stringify(user))
 
 localStorage.removeItem("cart")
+
+document.getElementById("creditsHeader").innerText = user.credits
 
 document.getElementById("orderMessage").innerText =
 "Grazie per il tuo ordine!"
