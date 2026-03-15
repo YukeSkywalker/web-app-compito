@@ -6,8 +6,6 @@ if(!code) return
 
 const user = JSON.parse(localStorage.getItem("user"))
 
-try{
-
 const res = await fetch(API_BASE_URL + "/api/users/"+user.id+"/coupon",{
 
 method:"POST",
@@ -23,24 +21,14 @@ body:JSON.stringify({code})
 const data = await res.json()
 
 if(!res.ok){
-
 alert(data.error)
 return
-
 }
-
-/* aggiorna utente */
 
 localStorage.setItem("user", JSON.stringify(data.user))
 
 alert("Hai ricevuto 200 crediti!")
 
 location.reload()
-
-}catch(error){
-
-alert("Errore server")
-
-}
 
 }
