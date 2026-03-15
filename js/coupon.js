@@ -1,30 +1,32 @@
-function redeemCoupon() {
-
+async function redeemCoupon() {
     const code = prompt("Inserisci codice coupon")
 
     if (!code) return
 
-    if (code !== "price2x") {
-        alert("Codice non valido")
-        return
+    const currentUser = JSON.parse(localStorage.getItem("user"))
+
+    try {
+        const res = await fetch(API_BASE_URL + "/api/users/" + currentUser.id + "/coupon", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ code })
+        })
+
+        const data = await res.json()
+
+        if (!res.ok) {
+            alert(data.error)
+            return
+        }
+
+        localStorage.setItem("user", JSON.stringify(data.user))
+
+        alert("Hai ricevuto 200 crediti!")
+
+        location.reload()
+    } catch (error) {
+        alert("Errore server")
     }
-
-    const used = localStorage.getItem("coupon_used")
-
-    if (used) {
-        alert("Buono già utilizzato")
-        return
-    }
-
-    let user = JSON.parse(localStorage.getItem("user"))
-
-    user.credits += 200
-
-    localStorage.setItem("user", JSON.stringify(user))
-    localStorage.setItem("coupon_used", true)
-
-    alert("Hai ricevuto 200 crediti!")
-
-    location.reload()
-
 }
