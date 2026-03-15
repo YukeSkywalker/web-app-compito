@@ -215,47 +215,42 @@ app.put("/api/users/:id/credits", async (req, res) => {
 /* =========================
 APPLY COUPON
 ========================= */
-app.post("/api/users/:id/coupon", async (req, res) => {
-    const { code } = req.body
+app.post("/api/users/:id/coupon", async (req,res)=>{
 
-    if (code !== "price2x") {
-        return res.status(400).json({ error: "Codice non valido" })
-    }
+const { code } = req.body
 
-    const { data: user, error: userError } = await supabase
-        .from("users")
-        .select("*")
-        .eq("id", req.params.id)
-        .single()
+if(code !== "price2x"){
+return res.status(400).json({error:"Codice non valido"})
+}
 
-    if (userError || !user) {
-        return res.status(404).json({ error: "Utente non trovato" })
-    }
+const { data:user } = await supabase
+.from("users")
+.select("*")
+.eq("id", req.params.id)
+.single()
 
-    const alreadyUsed = user.price2x_used === true
+if(!user){
+return res.status(404).json({error:"Utente non trovato"})
+}
 
-    if (alreadyUsed) {
-        return res.status(400).json({ error: "Buono già utilizzato" })
-    }
+if(user.price2x_used){
+return res.status(400).json({error:"Buono già utilizzato"})
+}
 
-    const { data: updatedUser, error: updateError } = await supabase
-        .from("users")
-        .update({
-            credits: Number(user.credits) + 200,
-            price2x_used: true
-        })
-        .eq("id", user.id)
-        .select()
-        .single()
+const { data:updatedUser } = await supabase
+.from("users")
+.update({
+credits: user.credits + 200,
+price2x_used: true
+})
+.eq("id", user.id)
+.select()
+.single()
 
-    if (updateError) {
-        return res.status(500).json({ error: updateError.message })
-    }
+res.json({
+user: updatedUser
+})
 
-    res.json({
-        message: "Coupon riscattato",
-        user: updatedUser
-    })
 })
 
 /* =========================
