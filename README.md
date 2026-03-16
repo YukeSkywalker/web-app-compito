@@ -186,4 +186,4 @@ utilizzando API REST e comunicazione JSON tra client e server.
 ## Demo
 
 Frontend:
-[https://TUOUSERNAME.github.io/web-app-compito/]([https://yukeskywalker.github.io/web-app-compito/login.html](https://yukeskywalker.github.io/)](https://yukeskywalker.github.io/web-app-compito/))
+[https://yukeskywalker.github.io/web-app-compito/]([https://yukeskywalker.github.io/web-app-compito/login.html](https://yukeskywalker.github.io/)](https://yukeskywalker.github.io/web-app-compito/))
