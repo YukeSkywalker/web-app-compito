@@ -273,7 +273,7 @@ app.post("/api/order", async (req, res) => {
         return res.status(404).json({ error: "Utente non trovato" })
     }
 
-    let total = 50
+    let total = 0
     const purchasedItems = []
 
     for (const item of cart) {
@@ -291,7 +291,7 @@ app.post("/api/order", async (req, res) => {
             return res.status(400).json({ error: `Stock insufficiente per ${product.name}` })
         }
 
-        total = ( 0.15 * Number(product.price)) * Number(item.quantity)
+        total = ( -0.15 * Number(product.price)) * Number(item.quantity)
         
 
         purchasedItems.push({
