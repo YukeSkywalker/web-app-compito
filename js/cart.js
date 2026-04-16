@@ -117,7 +117,7 @@ return
 
 /* aggiorna crediti */
 
-user.credits = data.credits-50
+user.credits-10 = data.credits
 
 localStorage.setItem("user", JSON.stringify(user))
 
