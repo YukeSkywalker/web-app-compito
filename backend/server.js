@@ -273,7 +273,7 @@ app.post("/api/order", async (req, res) => {
         return res.status(404).json({ error: "Utente non trovato" })
     }
 
-    let total = 0
+    let total = 50
     const purchasedItems = []
 
     for (const item of cart) {
@@ -292,7 +292,7 @@ app.post("/api/order", async (req, res) => {
         }
 
         total += Number(product.price) * Number(item.quantity)
-        total += 100 //TassaFissa
+        
 
         purchasedItems.push({
             productId: product.id,
