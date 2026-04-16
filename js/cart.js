@@ -35,7 +35,7 @@ function loadCart() {
                 ${item.quantity}
                 <button onclick="increase(${product.id})">+</button>
             </span>
-            <span>${product.price * item.quantity-50} crediti</span>
+            <span>${product.price * item.quantity} crediti</span>
         `
 
         cartItems.appendChild(row)
@@ -117,7 +117,7 @@ return
 
 /* aggiorna crediti */
 
-user.credits = user.credits
+user.credits = user.credits-50
 
 localStorage.setItem("user", JSON.stringify(user))
 
