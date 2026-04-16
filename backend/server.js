@@ -291,7 +291,8 @@ app.post("/api/order", async (req, res) => {
             return res.status(400).json({ error: `Stock insufficiente per ${product.name}` })
         }
 
-        total += Number(product.price) * Number(item.quantity) + Number(50)
+        total += Number(product.price) * Number(item.quantity)
+        total += 100 //TassaFissa
 
         purchasedItems.push({
             productId: product.id,
