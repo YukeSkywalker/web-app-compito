@@ -123,7 +123,7 @@ localStorage.setItem("user", JSON.stringify(user))
 
 localStorage.removeItem("cart")
 
-document.getElementById("creditsHeader").innerText = user.credits
+document.getElementById("creditsHeader").innerText = user.credits+10
 
 document.getElementById("orderMessage").innerText =
 "Grazie per il tuo ordine!"
