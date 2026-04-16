@@ -35,7 +35,7 @@ function loadCart() {
                 ${item.quantity}
                 <button onclick="increase(${product.id})">+</button>
             </span>
-            <span>${product.price * item.quantity-*0.1} crediti</span>
+            <span>${product.price * item.quantity-50} crediti</span>
         `
 
         cartItems.appendChild(row)
